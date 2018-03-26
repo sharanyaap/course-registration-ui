@@ -1,0 +1,40 @@
+<p>Student Course Registration Form</p>
+
+<h3>Select User :: </h3>
+<select ng-model="selectedName" ng-options="x.studentName for x in students" ng-change="onChangeUser()">
+</select>
+<h3>Select Course :: </h3>
+<div ng-show="showTable">
+    <form ng-submit="submit(); form.$setPristine()" ng-controller="View1Ctrl">
+        <table>
+            <thead>
+            <th>Course Name</th>
+            <th>Course Description</th>
+            <th>Course Start Date</th>
+            <th>Course End Date</th>
+            <th>Course Lecturer</th>
+            <th>Active</th>
+            <th>Request Status</th>
+            <th>Select Course</th>
+            </thead>
+            <tr ng-repeat="x in courses">
+                <td>{{ x.courseName }}</td>
+                <td>{{ x.courseDescription }}</td>
+                <td>{{ x.startDate }}</td>
+                <td>{{ x.endDate }}</td>
+                <td>{{ x.lecturerName }}</td>
+                <td>{{ x.active }}</td>
+                <td>{{ x.status }}</td>
+                <td><input ng-show="{{x.active && x.status == ''}}"
+                           type="checkbox"
+                           name="x"
+                           value="x"
+                           ng-checked="selection.indexOf(x.courseId) > -1"
+                           ng-click="toggleSelection(x)"/></td>
+            </tr>
+        </table>
+        <br/>
+        <!--<input type="submit" id="submit" value="Submit"/>-->
+        <button name="submit" type="button" ng-click="submit(); form.$setPristine(); reload();">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,27 @@
+<p>Admin Approval Form</p>
+<h3>Select Requests and Approve :: </h3>
+<form ng-controller="View2Ctrl">
+    <table>
+        <thead>
+        <th>Course Name</th>
+        <th>Student Name</th>
+        <th>Request Status</th>
+        <th>Select Course</th>
+        </thead>
+        <tr ng-repeat="x in studentCourses">
+            <td>{{ x.course.courseName }}</td>
+            <td>{{ x.student.studentName }}</td>
+            <td>{{ x.status == 1 ? 'Approved' : x.status == 2 ? 'Rejected' : 'Submitted' }}</td>
+            <td><input ng-show="{{x.status == 0 || x.status == 2}}"
+                       type="checkbox"
+                       name="x"
+                       value="x"
+                       ng-checked="selection.indexOf(x.studentCourseId) > -1"
+                       ng-click="toggleSelection(x)"/></td>
+        </tr>
+    </table>
+    <br/>
+    <!--<input type="submit" id="submit" value="Submit"/>-->
+    <button name="submit" type="button" ng-click="approve(); form.$setPristine(); reload();">Approve</button>
+    <button name="submit" type="button" ng-click="reject(); form.$setPristine(); reload();">Reject</button>
+</form>
